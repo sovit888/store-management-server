@@ -21,6 +21,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 const authRoutes = require("./routes/auth");
 const brandRoutes = require("./routes/brand");
 const categoryRoutes = require("./routes/category");
+const groupRoutes = require("./routes/group");
 const orderRoutes = require("./routes/order");
 const productRoutes = require("./routes/product");
 const storeRoutes = require("./routes/store");
@@ -28,12 +29,13 @@ const storeRoutes = require("./routes/store");
 app.use("/api", authRoutes);
 app.use("/api", brandRoutes);
 app.use("/api", categoryRoutes);
+app.use("/api", groupRoutes);
 app.use("/api", orderRoutes);
 app.use("/api", productRoutes);
 app.use("/api", storeRoutes);
 
 app.use(
-  "/api/products",
+  "/api/graphql",
   graphqlHTTP({
     rootValue: productResolver,
     schema: productSchema,

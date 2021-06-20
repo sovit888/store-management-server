@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 
 exports.getGroup = (req, res) => {
   GroupModel.find()
+    .where({ name: { $ne: "Admin" } })
     .then((groups) => {
       return res.json({ groups });
     })

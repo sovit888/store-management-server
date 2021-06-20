@@ -3,6 +3,8 @@ const router = express.Router();
 
 const bodyvalidations = require("../middlewares/bodyvalidation");
 const nameValidation = require("../validations/name");
+const isLoggedin = require("../middlewares/isLoggedin");
+const isAdmin = require("../middlewares/isAdmin");
 
 const {
   getGroup,
@@ -11,9 +13,23 @@ const {
   removeGroup,
 } = require("../controllers/group");
 
-router.get("/group", getGroup);
-router.post("/group", nameValidation, bodyvalidations, insertGroup);
-router.put("/group", nameValidation, bodyvalidations, updateGroup);
-router.delete("/group/:id", removeGroup);
+router.get("/group", isLoggedin, isAdmin, getGroup);
+router.post(
+  "/group",
+  isLoggedin,
+  isAdmin,
+  nameValidation,
+  bodyvalidations,
+  insertGroup
+);
+router.put(
+  "/group",
+  isLoggedin,
+  isAdmin,
+  nameValidation,
+  bodyvalidations,
+  updateGroup
+);
+router.delete("/group/:id", isLoggedin, isAdmin, removeGroup);
 
 module.exports = router;

@@ -24,7 +24,7 @@ exports.insertStore = (req, res) => {
 exports.updateStore = (req, res) => {
   const { _id, ...body } = req.body;
   if (!mongoose.Types.ObjectId.isValid(_id)) {
-    return res.status(422).json({ error: "cannot find stre" });
+    return res.status(422).json({ error: "cannot find store" });
   }
   StoreModel.findByIdAndUpdate(_id, { $set: body }, { new: true })
     .then((store) => {

@@ -18,6 +18,8 @@ mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
 });
 
+const attributeRoutes = require("./routes/attribute");
+const attributeValueRoutes = require("./routes/attributevalue");
 const authRoutes = require("./routes/auth");
 const brandRoutes = require("./routes/brand");
 const categoryRoutes = require("./routes/category");
@@ -26,6 +28,8 @@ const orderRoutes = require("./routes/order");
 const productRoutes = require("./routes/product");
 const storeRoutes = require("./routes/store");
 
+app.use("/api", attributeRoutes);
+app.use("/api", attributeValueRoutes);
 app.use("/api", authRoutes);
 app.use("/api", brandRoutes);
 app.use("/api", categoryRoutes);

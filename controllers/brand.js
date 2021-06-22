@@ -40,8 +40,8 @@ exports.removeBrand = (req, res) => {
     return res.status(422).json({ error: "cannot find brand" });
   }
   BrandModel.findByIdAndDelete(req.params.id)
-    .then((store) => {
-      return res.json({ store });
+    .then((brand) => {
+      return res.json({ brand });
     })
     .catch((error) => {
       return res.status(422).json({ error: "cannot remove brand" });

@@ -8,6 +8,8 @@ const groupSchema = new mongoose.Schema({
   products: { type: Boolean, default: false },
   orders: { type: Boolean, default: false },
   stores: { type: Boolean, default: false },
+  users: { type: Boolean, default: false },
+  groups: { type: Boolean, default: false },
 });
 
 module.exports = mongoose.model("group", groupSchema);

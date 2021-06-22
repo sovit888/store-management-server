@@ -3,7 +3,9 @@ const mongoose = require("mongoose");
 const attributeValueSchema = new mongoose.Schema({
   name: { type: String, required: true, unique: true },
   attribute: {
-    type: { type: mongoose.Types.ObjectId, ref: "attribute", required: true },
+    type: mongoose.Types.ObjectId,
+    ref: "attribute",
+    required: true,
   },
 });
 

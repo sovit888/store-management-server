@@ -14,7 +14,7 @@ mongoose.connect(process.env.MONGODB_URI, {
   useCreateIndex: true,
   useCreateIndex: true,
   useUnifiedTopology: true,
-  useFindAndModify: true,
+  useFindAndModify: false,
   useNewUrlParser: true,
 });
 
@@ -27,6 +27,7 @@ const groupRoutes = require("./routes/group");
 const orderRoutes = require("./routes/order");
 const productRoutes = require("./routes/product");
 const storeRoutes = require("./routes/store");
+const userRoutes = require("./routes/user");
 
 app.use("/api", attributeRoutes);
 app.use("/api", attributeValueRoutes);
@@ -37,6 +38,7 @@ app.use("/api", groupRoutes);
 app.use("/api", orderRoutes);
 app.use("/api", productRoutes);
 app.use("/api", storeRoutes);
+app.use("/api", userRoutes);
 
 app.use(
   "/api/graphql",

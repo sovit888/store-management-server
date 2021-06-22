@@ -11,7 +11,6 @@ module.exports = (req, res, next) => {
     if (error) {
       return res.status(400).json({ error: "Unauthorized" });
     }
-
     User.findById(payload._id)
       .select(["-enc_password", "-salt"])
       .populate("group")

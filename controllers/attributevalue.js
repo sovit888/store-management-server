@@ -16,17 +16,18 @@ exports.getAttributeValues = async (req, res) => {
   }
 };
 
-exports.insertAttributeValues = (req, res) => {
+exports.insertAttributeValues = async (req, res) => {
   try {
     const newAttributeValue = new AttributeValueModel(req.body);
     let values = await newAttributeValue.save();
     return res.json({ values });
   } catch (error) {
+    console.log(error);
     return res.status(422).json({ error: "cannot insert attributes" });
   }
 };
 
-exports.updateAttributeValues = (req, res) => {
+exports.updateAttributeValues = async (req, res) => {
   const { _id, name } = req.body;
   if (!mongoose.Types.ObjectId.isValid(_id)) {
     return res.status(422).json({ error: "cannot find attribute values" });
@@ -43,10 +44,9 @@ exports.updateAttributeValues = (req, res) => {
   }
 };
 
-exports.removeAttributeValues = (req, res) => {
-  const attribute = req.query.attribute;
+exports.removeAttributeValues = async (req, res) => {
   const id = req.params.id;
-  if (!mongoose.Types.ObjectId.isValid(attribute)) {
+  if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(422).json({ error: "cannot get attributes" });
   }
   try {

@@ -5,13 +5,13 @@ const { loginUser, signupUser, getProfile } = require("../controllers/auth");
 const { loginCheck, signupCheck } = require("../validations/auth");
 const bodyvalidations = require("../middlewares/bodyvalidation");
 const isLoggedin = require("../middlewares/isLoggedin");
-const isAdmin = require("../middlewares/isAdmin");
+const hasPermission = require("../middlewares/hasPermission");
 
 router.post("/auth/login", loginCheck, bodyvalidations, loginUser);
 router.post(
   "/auth/signup",
   isLoggedin,
-  isAdmin,
+  hasPermission("users"),
   signupCheck,
   bodyvalidations,
   signupUser

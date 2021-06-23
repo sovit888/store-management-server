@@ -15,13 +15,13 @@ const {
 } = require("../controllers/attributevalue");
 
 router.get(
-  "/attribute/values",
+  "/:attributeId/values",
   isLoggedin,
   hasPermission("attributes"),
   getAttributeValues
 );
 router.post(
-  "/attribute/values",
+  "/:attributeId/values",
   isLoggedin,
   hasPermission("attributes"),
   attributeValidation,
@@ -30,7 +30,7 @@ router.post(
 );
 
 router.put(
-  "/attribute/values",
+  "/:attributeId/values",
   isLoggedin,
   hasPermission("attributes"),
   nameValidation,
@@ -39,7 +39,7 @@ router.put(
 );
 
 router.delete(
-  "/attribute/values/:id",
+  "/:attributeId/values/:id",
   isLoggedin,
   hasPermission("attributes"),
   removeAttributeValues

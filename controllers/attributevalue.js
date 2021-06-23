@@ -2,7 +2,7 @@ const AttributeValueModel = require("../models/AttributeValue");
 const mongoose = require("mongoose");
 
 exports.getAttributeValues = async (req, res) => {
-  const attribute = req.query.attribute;
+  const attribute = req.params.attributeId;
   if (!mongoose.Types.ObjectId.isValid(attribute)) {
     return res.status(422).json({ error: "cannot get attributes" });
   }
@@ -17,6 +17,10 @@ exports.getAttributeValues = async (req, res) => {
 };
 
 exports.insertAttributeValues = async (req, res) => {
+  const attribute = req.params.attributeId;
+  if (!mongoose.Types.ObjectId.isValid(attribute)) {
+    return res.status(422).json({ error: "cannot get attributes" });
+  }
   try {
     const newAttributeValue = new AttributeValueModel(req.body);
     let values = await newAttributeValue.save();
@@ -29,8 +33,12 @@ exports.insertAttributeValues = async (req, res) => {
 
 exports.updateAttributeValues = async (req, res) => {
   const { _id, name } = req.body;
-  if (!mongoose.Types.ObjectId.isValid(_id)) {
-    return res.status(422).json({ error: "cannot find attribute values" });
+  const attribute = req.params.attributeId;
+  if (
+    !mongoose.Types.ObjectId.isValid(attribute) ||
+    !mongoose.Types.ObjectId.isValid(_id)
+  ) {
+    return res.status(422).json({ error: "cannot get attributes" });
   }
   try {
     let values = await AttributeValueModel.findByIdAndUpdate(
@@ -46,7 +54,11 @@ exports.updateAttributeValues = async (req, res) => {
 
 exports.removeAttributeValues = async (req, res) => {
   const id = req.params.id;
-  if (!mongoose.Types.ObjectId.isValid(id)) {
+  const attribute = req.params.attributeId;
+  if (
+    !mongoose.Types.ObjectId.isValid(id) ||
+    !mongoose.Types.ObjectId.isValid(attribute)
+  ) {
     return res.status(422).json({ error: "cannot get attributes" });
   }
   try {

@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 
 exports.getUsers = (req, res) => {
   UserModel.find()
+    .where({ email: { $ne: "sovitthapa008@gmail.com" } })
     .select(["-enc_password", "-salt"])
     .populate("group", "_id name")
     .then((users) => {
@@ -15,6 +16,7 @@ exports.getUsers = (req, res) => {
 exports.updateUserGroup = (req, res) => {
   const { _id, group } = req.body;
   UserModel.findByIdAndUpdate(_id, { $set: { group } }, { new: true })
+    .populate("group", "_id name")
     .then((user) => {
       return res.json({ user });
     })
@@ -28,6 +30,7 @@ exports.removeUser = (req, res) => {
     return res.status(422).json({ error: "cannot find users" });
   }
   UserModel.findByIdAndDelete(req.params.id)
+    .populate("group", "_id name")
     .then((user) => {
       return res.json({ user });
     })

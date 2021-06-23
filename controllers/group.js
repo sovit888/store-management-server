@@ -48,3 +48,16 @@ exports.removeGroup = (req, res) => {
       return res.status(422).json({ error: "Cannot delete group" });
     });
 };
+
+exports.getUniqueGroup = (req, res) => {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    return res.status(422).json({ error: "Cannot get group" });
+  }
+  GroupModel.findById(req.params.id)
+    .then((group) => {
+      return res.json({ group });
+    })
+    .catch((error) => {
+      return res.status(422).json({ error: "cannot get group" });
+    });
+};

@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
       return res.status(400).json({ error: "Unauthorized" });
     }
     User.findById(payload._id)
-      .select(["-enc_password", "-salt"])
+      .select(["-salt", "-enc_password"])
       .populate("group")
       .then((user) => {
         req.user = user;

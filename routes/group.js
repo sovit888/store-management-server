@@ -11,9 +11,11 @@ const {
   insertGroup,
   updateGroup,
   removeGroup,
+  getUniqueGroup,
 } = require("../controllers/group");
 
 router.get("/group", isLoggedin, hasPermission("groups"), getGroup);
+router.get("/group/:id", isLoggedin, hasPermission("groups"), getUniqueGroup);
 router.post(
   "/group",
   isLoggedin,

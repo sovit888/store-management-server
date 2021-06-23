@@ -14,7 +14,7 @@ const {
 
 router.get("/user", isLoggedin, hasPermission("users"), getUsers);
 router.put(
-  "/group",
+  "/user",
   isLoggedin,
   hasPermission("users"),
   userValidation,

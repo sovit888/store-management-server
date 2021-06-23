@@ -25,7 +25,9 @@ const brandRoutes = require("./routes/brand");
 const categoryRoutes = require("./routes/category");
 const groupRoutes = require("./routes/group");
 const orderRoutes = require("./routes/order");
+const passwordRoutes = require("./routes/password");
 const productRoutes = require("./routes/product");
+const profileRoutes = require("./routes/profile");
 const storeRoutes = require("./routes/store");
 const userRoutes = require("./routes/user");
 
@@ -36,7 +38,9 @@ app.use("/api", brandRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", groupRoutes);
 app.use("/api", orderRoutes);
+app.use("/api", passwordRoutes);
 app.use("/api", productRoutes);
+app.use("/api", profileRoutes);
 app.use("/api", storeRoutes);
 app.use("/api", userRoutes);
 

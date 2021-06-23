@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { loginUser, signupUser, getProfile } = require("../controllers/auth");
+const { loginUser, signupUser } = require("../controllers/auth");
 const { loginCheck, signupCheck } = require("../validations/auth");
 const bodyvalidations = require("../middlewares/bodyvalidation");
 const isLoggedin = require("../middlewares/isLoggedin");
@@ -16,6 +16,5 @@ router.post(
   bodyvalidations,
   signupUser
 );
-router.get("/profile", isLoggedin, getProfile);
 
 module.exports = router;

@@ -21,10 +21,6 @@ exports.signupUser = (req, res) => {
     if (error) {
       return res.status(400).json({ error: "cannot insert user" });
     }
-    return res.json({ message: "new user inserted" });
+    return res.json({ user });
   });
-};
-
-exports.getProfile = (req, res) => {
-  return res.json(req.user);
 };

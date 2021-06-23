@@ -66,6 +66,10 @@ userSchema.method({
   authenticate: function (plainpassword) {
     return this.enc_password === this.securePassword(plainpassword);
   },
+  changePassword: function (password) {
+    this.enc_password = this.securePassword(password);
+    this.save();
+  },
 });
 
 module.exports = mongoose.model("user", userSchema);

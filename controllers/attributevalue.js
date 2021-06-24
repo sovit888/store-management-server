@@ -23,8 +23,8 @@ exports.insertAttributeValues = async (req, res) => {
   }
   try {
     const newAttributeValue = new AttributeValueModel(req.body);
-    let values = await newAttributeValue.save();
-    return res.json({ values });
+    let value = await newAttributeValue.save();
+    return res.json({ value });
   } catch (error) {
     console.log(error);
     return res.status(422).json({ error: "cannot insert attributes" });
@@ -32,7 +32,7 @@ exports.insertAttributeValues = async (req, res) => {
 };
 
 exports.updateAttributeValues = async (req, res) => {
-  const { _id, name } = req.body;
+  const { _id, ...body } = req.body;
   const attribute = req.params.attributeId;
   if (
     !mongoose.Types.ObjectId.isValid(attribute) ||
@@ -43,7 +43,7 @@ exports.updateAttributeValues = async (req, res) => {
   try {
     let values = await AttributeValueModel.findByIdAndUpdate(
       _id,
-      { $set: { name } },
+      { $set: body },
       { new: true }
     );
     return res.json({ values });

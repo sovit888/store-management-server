@@ -7,6 +7,7 @@ const attributeValueSchema = new mongoose.Schema({
     ref: "attribute",
     required: true,
   },
+  status: { type: Boolean, default: false },
 });
 
 module.exports = mongoose.model("attribute_value", attributeValueSchema);

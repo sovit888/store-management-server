@@ -3,12 +3,15 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const { graphqlHTTP } = require("express-graphql");
-const { productResolver, productSchema } = require("./graphql/product");
+const resolver = require("./utils/resolver");
+const schema = require("./utils/schema");
+const path = require("path");
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+app.use("/static", express.static(path.resolve(__dirname, "assets")));
 
 mongoose.connect(process.env.MONGODB_URI, {
   useCreateIndex: true,
@@ -47,8 +50,8 @@ app.use("/api", userRoutes);
 app.use(
   "/api/graphql",
   graphqlHTTP({
-    rootValue: productResolver,
-    schema: productSchema,
+    rootValue: resolver,
+    schema: schema,
     graphiql: true,
   })
 );

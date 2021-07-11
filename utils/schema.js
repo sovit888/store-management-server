@@ -5,7 +5,7 @@ type Query{
     users:Int
     groups:Int
     sales:Int
-    income:Int
+    income:Float
     brands:[SameType]
     stores:[SameType]
     categorys:[SameType]

@@ -11,6 +11,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+app.use(express.static(path.join(__dirname, "build")));
 app.use("/static", express.static(path.resolve(__dirname, "assets")));
 
 mongoose.connect(process.env.MONGODB_URI, {
@@ -52,8 +53,11 @@ app.use(
   graphqlHTTP({
     rootValue: resolver,
     schema: schema,
-    graphiql: true,
   })
 );
+
+app.get("/*", (req, res) => {
+  return res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 
 app.listen(process.env.PORT);
